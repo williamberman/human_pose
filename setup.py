@@ -78,6 +78,7 @@ from setuptools import find_packages, setup
 # 1. all dependencies should be listed here with their version requirements if any
 # 2. once modified, run: `make deps_table_update` to update src/diffusers/dependency_versions_table.py
 _deps = [
+    "Pillow",
     "torch",
     "numpy",
     "filelock",
@@ -165,6 +166,7 @@ install_requires = [
     deps["opencv-python"],
     deps["filelock"],
     deps["numpy"],
+    deps["Pillow"],
 ]
 
 setup(
