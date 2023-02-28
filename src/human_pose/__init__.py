@@ -4,12 +4,11 @@ os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 import torch
 import cv2
 import numpy as np
-from . import util
 from PIL import Image
-from util import HWC3, resize_image
+from .util import HWC3, resize_image, draw_bodypose
 from .body import Body
-from .hand import Hand
 from huggingface_hub import hf_hub_download
+# from .hand import Hand
 # from annotator.util import annotator_ckpts_path
 
 
@@ -51,7 +50,7 @@ class OpenposeDetector:
         with torch.no_grad():
             candidate, subset = self.body_estimation(input_image)
             canvas = np.zeros_like(input_image)
-            canvas = util.draw_bodypose(canvas, candidate, subset)
+            canvas = draw_bodypose(canvas, candidate, subset)
 #            if hand:
 #                hands_list = util.handDetect(candidate, subset, oriImg)
 #                all_hand_peaks = []
