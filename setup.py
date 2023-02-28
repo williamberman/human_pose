@@ -82,9 +82,9 @@ _deps = [
     "numpy",
     "filelock",
     "importlib_metadata",
-    "opencv-python"
-    "matplotlib"
-    "scipy"
+    "opencv-python",
+    "matplotlib",
+    "scipy",
     "huggingface_hub"
 ]
 
@@ -156,15 +156,13 @@ extras = {}
 
 
 extras = {}
-extras["quality"] = deps_list("black", "isort", "flake8")
-
-
-extras["dev"] = extras["quality"] + deps_list("transformers", "accelerate")
-
 
 install_requires = [
     deps["torch"],
     deps["importlib_metadata"],
+    deps["huggingface_hub"],
+    deps["scipy"],
+    deps["opencv-python"],
     deps["filelock"],
     deps["numpy"],
 ]
