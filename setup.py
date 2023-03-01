@@ -86,8 +86,8 @@ _deps = [
     "opencv-python",
     "matplotlib",
     "scipy",
-    "huggingface_hub"
-    "einops",
+    "huggingface_hub",
+    "einops"
 ]
 
 # this is a lookup table with items like:
