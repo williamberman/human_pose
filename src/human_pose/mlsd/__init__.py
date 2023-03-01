@@ -30,6 +30,7 @@ class MLSDdetector:
             input_image = np.array(input_image, dtype=np.uint8)
 
         input_image = HWC3(input_image)
+        input_image = resize_image(input_image, detect_resolution)
 
         assert input_image.ndim == 3
         img = input_image
@@ -42,6 +43,7 @@ class MLSDdetector:
                     cv2.line(img_output, (x_start, y_start), (x_end, y_end), [255, 255, 255], 1)
         except Exception as e:
             pass
+
         detected_map = img_output[:, :, 0]
 
         detected_map = HWC3(detected_map)
@@ -49,6 +51,8 @@ class MLSDdetector:
         H, W, C = img.shape
 
         detected_map = cv2.resize(detected_map, (W, H), interpolation=cv2.INTER_NEAREST)
+
+        detected_map = 255 - detected_map
 
         if return_pil:
             detected_map = Image.fromarray(detected_map)
