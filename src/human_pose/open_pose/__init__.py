@@ -45,7 +45,6 @@ class OpenposeDetector:
             input_image = np.array(input_image, dtype=np.uint8)
 
         input_image = HWC3(input_image)
-        input_image = input_image.to(self.body_estimation.device)
         input_image = resize_image(input_image, detect_resolution)
         input_image = input_image[:, :, ::-1].copy()
         with torch.no_grad():

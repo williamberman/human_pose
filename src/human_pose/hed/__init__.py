@@ -112,13 +112,13 @@ class HEDdetector:
             input_image = np.array(input_image, dtype=np.uint8)
 
         input_image = HWC3(input_image)
-        input_image = input_image.to(self.netNetwork.device)
         input_image = resize_image(input_image, detect_resolution)
 
         assert input_image.ndim == 3
         input_image = input_image[:, :, ::-1].copy()
         with torch.no_grad():
             image_hed = torch.from_numpy(input_image).float()
+            input_image = input_image.to(self.netNetwork.device)
             image_hed = image_hed / 255.0
             image_hed = rearrange(image_hed, 'h w c -> 1 c h w')
             edge = self.netNetwork(image_hed)[0]
