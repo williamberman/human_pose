@@ -30,7 +30,6 @@ class MLSDdetector:
             input_image = np.array(input_image, dtype=np.uint8)
 
         input_image = HWC3(input_image)
-        input_image = input_image.to(self.model.device)
 
         assert input_image.ndim == 3
         img = input_image

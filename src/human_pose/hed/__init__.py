@@ -108,6 +108,7 @@ class HEDdetector:
         return cls(netNetwork)
 
     def __call__(self, input_image, detect_resolution=512, image_resolution=512, return_pil=True):
+        device = next(iter(self.netNetwork.parameters())).device
         if not isinstance(input_image, np.ndarray):
             input_image = np.array(input_image, dtype=np.uint8)
 
@@ -118,7 +119,7 @@ class HEDdetector:
         input_image = input_image[:, :, ::-1].copy()
         with torch.no_grad():
             image_hed = torch.from_numpy(input_image).float()
-            input_image = input_image.to(self.netNetwork.device)
+            image_hed = image_hed.to(device)
             image_hed = image_hed / 255.0
             image_hed = rearrange(image_hed, 'h w c -> 1 c h w')
             edge = self.netNetwork(image_hed)[0]
