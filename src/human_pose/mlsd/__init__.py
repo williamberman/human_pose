@@ -50,4 +50,7 @@ class MLSDdetector:
 
         detected_map = cv2.resize(detected_map, (W, H), interpolation=cv2.INTER_NEAREST)
 
-        return img_output
+        if return_pil:
+            detected_map = Image.fromarray(detected_map)
+
+        return detected_map
