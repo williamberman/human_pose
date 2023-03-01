@@ -87,6 +87,7 @@ _deps = [
     "matplotlib",
     "scipy",
     "huggingface_hub"
+    "einops",
 ]
 
 # this is a lookup table with items like:
@@ -167,6 +168,7 @@ install_requires = [
     deps["filelock"],
     deps["numpy"],
     deps["Pillow"],
+    deps["einops"],
 ]
 
 setup(
