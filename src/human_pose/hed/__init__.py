@@ -107,7 +107,7 @@ class HEDdetector:
 
         return cls(netNetwork)
 
-    def __call__(self, input_image, detect_resolution=512, image_resolution=512, return_pil=True):
+    def __call__(self, input_image, detect_resolution=512, image_resolution=512, return_pil=True, scribble=False):
         device = next(iter(self.netNetwork.parameters())).device
         if not isinstance(input_image, np.ndarray):
             input_image = np.array(input_image, dtype=np.uint8)
@@ -134,10 +134,12 @@ class HEDdetector:
         H, W, C = img.shape
 
         detected_map = cv2.resize(detected_map, (W, H), interpolation=cv2.INTER_LINEAR)
-        detected_map = nms(detected_map, 127, 3.0)
-        detected_map = cv2.GaussianBlur(detected_map, (0, 0), 3.0)
-        detected_map[detected_map > 4] = 255
-        detected_map[detected_map < 255] = 0
+        
+        if scribble:
+            detected_map = nms(detected_map, 127, 3.0)
+            detected_map = cv2.GaussianBlur(detected_map, (0, 0), 3.0)
+            detected_map[detected_map > 4] = 255
+            detected_map[detected_map < 255] = 0
 
         detected_map = 255 - detected_map
 
