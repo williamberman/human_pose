@@ -139,8 +139,6 @@ class HEDdetector:
         detected_map[detected_map > 4] = 255
         detected_map[detected_map < 255] = 0
 
-        detected_map = 255 - detected_map
-
         if return_pil:
             detected_map = Image.fromarray(detected_map)
 
